@@ -1,3 +1,0 @@
-This is a script to fix a bug in the chrome browser that does not allow the HTML5 accesskey attribute to work property.
-This script has a function that the user might tweak to make the accesskeys functionality behave as wanted.
-The 3 html files accompaning it are here for test purposes. You might test if the script works using these files.

@@ -1,23 +1,30 @@
-//get all the anchors ('a' tags) in the document
-var anchors = document.getElementsByTagName('a');
-
-//object to store all of the anchors ('a' tags) that have accesskeys
-//the keys will be the respective anchor's keys and the value will be a reference to the anchor element
-var accessAnchors = {};
-for (var i = 0; i < anchors.length; i++) {
-	if (anchors[i].hasAttribute('accesskey')) {
-		//if the anchor has an accesskey store it in the accessAnchors object
-		accessAnchors[anchors[i].accessKey] = anchors[i]; 
+/**
+This is a function to be called when the page finishes loading (window.onload)
+It gathers the anchors which have accesskeys in an object. This object is stored as the value
+of a created element 'anchors'
+*/
+function createAccessAnchors() {
+	//get all the anchors ('a' tags) in the document
+	var anchors = document.getElementsByTagName('a');
+	
+	//object to store all of the anchors ('a' tags) that have accesskeys
+	//the keys will be the respective anchor's keys and the value will be a reference to the anchor element
+	var accessAnchors = {};
+	for (var i = 0; i < anchors.length; i++) {
+		if (anchors[i].hasAttribute('accesskey')) {
+			//if the anchor has an accesskey store it in the accessAnchors object
+			accessAnchors[anchors[i].accessKey] = anchors[i]; 
+		}
 	}
+	
+	//create a DOMElement 'anchors' to store the accessAnchors as its value
+	var anchorsElement = document.createElement('anchors');
+	anchorsElement.value = accessAnchors;
+	anchorsElement.id = 'accessAnchors';
+	
+	//append the anchor tag to the body of the html document
+	document.getElementsByTagName('body')[0].appendChild(anchorsElement);
 }
-
-//create a DOMElement 'anchors' to store the accessAnchors as its value
-var anchorsElement = document.createElement('anchors');
-anchorsElement.value = accessAnchors;
-anchorsElement.id = 'accessAnchors';
-
-//append the anchor tag to the body of the html document
-document.getElementsByTagName('body')[0].appendChild(anchorsElement);
 
 
 //function to test if the specified modifiers were pressed
@@ -93,6 +100,3 @@ function myKeydown(e) {
 		}
 	}
 }
-
-//bind the myKeydown function to the event onkeydown
-document.onkeydown = myKeydown;
