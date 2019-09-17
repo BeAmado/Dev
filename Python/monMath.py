@@ -22,10 +22,13 @@ class Matrix(list):
         return self.__data[:]
 
     def identity(size):
-        return Matrix([[1 if j == i else 0 for j in range(size)] for i in range(size)])
+        return Matrix([
+            [1 if j == i else 0 for j in range(size)] for i in range(size)
+        ])
 
     def getDimensions(self):
-        """Returns the dimensions in a dictionary with keys 'cols' and 'rows'."""
+        """Returns the dimensions in a dictionary with keys 
+        'cols' and 'rows'."""
         return {'cols': self.__ncols, 'rows': self.__nrows}
 
     def isMatrix(mat):
@@ -38,13 +41,22 @@ class Matrix(list):
         if (not self.__validMatrix(mat)):
             return False
 
-        return (self.__ncols == mat.getDimensions()['cols']) and (self.__nrows == mat.getDimensions()['rows'])
+        return (
+            (self.__ncols == mat.getDimensions()['cols']) and 
+            (self.__nrows == mat.getDimensions()['rows'])
+        )
 
     def __add__(self, other):
         if (not self.__sameDimensions(other)):
             return None
         
-        return Matrix([[(self.getValue()[i][j] + other.getValue()[i][j]) for j in range(self.__ncols)] for i in range(self.__nrows)])
+        return Matrix([
+            [
+                (
+                    self.getValue()[i][j] + other.getValue()[i][j]
+                ) for j in range(self.__ncols)
+            ] for i in range(self.__nrows)
+        ])
 
     def getRow(self, n):
         """Returns the nth row, 0 <= n"""
@@ -57,6 +69,3 @@ class Matrix(list):
             return [self.getValue()[i][n] for i in range(self.__nrows)]
 
 
-class ColumnMatrix(Matrix):
-    def __valid(self, m):
-        if (not isinstance(m, list))
